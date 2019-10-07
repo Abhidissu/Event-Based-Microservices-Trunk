@@ -1,0 +1,22 @@
+Start Zookeeper >>
+Croot@trident-HP-EliteBook-8470p:/home/trident/Downloads/kafka_2.12-2.3.0# ./bin/zookeeper-server-start.sh config/zookeeper.properties
+Start Kafka Server >> 
+Croot@trident-HP-EliteBook-8470p:/home/trident/Downloads/kafka_2.12-2.3.0# ./bin/kafka-server-start.sh config/server.properties
+
+------------In order to produce consumer and producer from machine---------------------------
+root@trident-HP-EliteBook-8470p:/home/trident/Downloads/kafka_2.12-2.3.0# ./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic MyFirstTopic
+root@trident-HP-EliteBook-8470p:/home/trident/Downloads/kafka_2.12-2.3.0# ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic MyFirstTopic
+
+---------------------Start Springboot microservice to push messages -------------------------
+Create a topic >>  bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic Kafka_Micro
+List of topics >>  bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+Start Consumer console to see messages >> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic Kafka_Micro --from-beginning
+
+
+-----------------------In order to schedule the API[-------------------------------------------
+curl -X POST -F 'message=test' http://localhost:8085/Kafka/publishmessage
+
+
+-----------------Create an Microservices to produce into Topic---------------------------------
+Go to https://start.spring.io/ site & create an application with Kafak and Web dependicies
+Then import that application into IntelliJ application.
