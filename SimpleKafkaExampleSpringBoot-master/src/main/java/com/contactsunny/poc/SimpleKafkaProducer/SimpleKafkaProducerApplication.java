@@ -127,7 +127,7 @@ public class SimpleKafkaProducerApplication implements CommandLineRunner {
 			  while ((st = br.readLine()) != null) {
 				   System.out.println(st);
 				   String temp = String.valueOf(st); 
-				   sendKafkaMessage("The index is now: " + temp, producer, theTechCheckTopicName);
+				   sendKafkaMessage(temp, producer, theTechCheckTopicName);
 			  } 
 			     
 			  
